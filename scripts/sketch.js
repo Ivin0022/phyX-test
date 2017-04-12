@@ -3,7 +3,7 @@ var r2;
 
 function setup() {
 	createCanvas(400, 400);
-	noStroke();
+	// noStroke();
 
 	r1 = new rect_obj();
 	r2 = new rect_obj();
@@ -11,26 +11,40 @@ function setup() {
 
 function draw() {
 	background(105);
-	// r2.x = mouseX;
-	// r2.y = mouseY;
 	r2.update();
-	r1.solifiy(r2);
+	r1.isTouching(r2, solifiy);
 
 	r1.show();
 	r2.show();
 
-	var r = r1.isTouching(r2);
-	push();
-
-		fill(255,0,0,100);
-		rect(r.x, r.y, r.w, r.h);
-
-	pop();
+	// push();
+	//
+	// 	fill(255,0,0,100);
+	// 	rect(r.x, r.y, r.w, r.h);
+	//
+	// pop();
 
 }
 
+
+solifiy = function (r) {
+	if (r.w < r.h) {
+		if (r1.x > r2.x) {
+			r2.x -= r.w;
+		} else {
+			r2.x += r.w;
+		}
+	} else {
+		if (r1.y > r2.y) {
+			r2.y -= r.h;
+		} else {
+			r2.y += r.h;
+		}
+	}
+}
+
 function keyPressed() {
-	var speed = 1;
+	var speed = 5;
 
 	if (key === 'A') {
 		r2.setDir(-speed, 0);

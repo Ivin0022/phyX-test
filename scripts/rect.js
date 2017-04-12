@@ -8,7 +8,7 @@ function rect_obj(w, h) {
 	var vel = createVector(0,0);
 
 
-	this.isTouching = function (rectangle) {
+	this.isTouching = function (rectangle, callback) {
 		// Rectangles with negative dimensions are allowed, so we must handle them correctly
 
 		// Compute the min and max of the first rectangle on both axes
@@ -32,38 +32,23 @@ function rect_obj(w, h) {
 		// If the intersection is valid (positive non zero area), then there is an intersection
 		if ((interLeft < interRight) && (interTop < interBottom))
 		{
-				this.rect = {'touching': true, 'x': interLeft,'y': interTop, 'w': interRight - interLeft, 'h': interBottom - interTop};
-				return this.rect;
+				var r = {'touching': true, 'x': interLeft,'y': interTop, 'w': interRight - interLeft, 'h': interBottom - interTop};
+				// return this.rect;
+				callback(r);
+
 		}
 		else
 		{
-				this.rect = {'touching': false, 'x': 0, 'y': 0, 'w': 0, 'h':0};
-				return this.rect;
+				// this.rect = {'touching': false, 'x': 0, 'y': 0, 'w': 0, 'h':0};
+				// return this.rect;
 		}
 	}
 
-	this.solifiy = function (obj) {
-		var r = this.isTouching(obj);
-		if (r.touching) {
-			if (r.w < r.h) {
-				if (this.x > obj.x) {
-					obj.x -= r.w;
-				} else {
-					obj.x += r.w;
-				}
-			} else {
-				if (this.y > obj.y) {
-					obj.y -= r.h;
-				} else {
-					obj.y += r.h;
-				}
-			}
-		}
-	}
+
 
   this.setDir = function (x, y) {
 		vel.x = x;
-		vel.y = y;	
+		vel.y = y;
   }
 
 	this.update = function () {

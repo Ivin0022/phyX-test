@@ -1,0 +1,9 @@
+# cleaner code is needed
+
+# the callback needs to be more optimized to handle any type implementation
+
+# there could be problem that arise when the size of the obj is smaller than
+  the jump step, a way to solve that could be a linear interpolation of the
+  start point of the and the end point of the step
+
+#
